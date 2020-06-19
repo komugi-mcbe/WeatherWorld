@@ -24,6 +24,7 @@ class EventListener implements Listener
         $player = $event->getPlayer();
         $level = $player->getLevel()->getFolderName();
         if ($this->weather == 2) {
+            $player->sendMessage(' §7 >> §f今日の地球の天気は 雨 です');
             if ($level == "earch") {
                 $pk = new LevelEventPacket();
                 $pk->position = $player;
@@ -37,6 +38,8 @@ class EventListener implements Listener
                 $pk->evid = LevelEventPacket::EVENT_STOP_RAIN;
                 $player->dataPacket($pk);
             }
+        }else{
+            $player->sendMessage(' §7 >> §f今日の地球の天気は 晴れ です');
         }
     }
 

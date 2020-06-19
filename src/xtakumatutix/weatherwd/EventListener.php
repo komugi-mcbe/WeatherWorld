@@ -23,18 +23,20 @@ class EventListener implements Listener
     {
         $player = $event->getPlayer();
         $level = $player->getLevel()->getFolderName();
-        if ($level == "earch") {
-            $pk = new LevelEventPacket();
-            $pk->position = $player;
-            $pk->data = 90000;
-            $pk->evid = LevelEventPacket::EVENT_START_RAIN;
-            $player->dataPacket($pk);
-        } else {
-            $pk = new LevelEventPacket();
-            $pk->position = $player;
-            $pk->data = 90000;
-            $pk->evid = LevelEventPacket::EVENT_STOP_RAIN;
-            $player->dataPacket($pk);
+        if ($this->weather == 2) {
+            if ($level == "earch") {
+                $pk = new LevelEventPacket();
+                $pk->position = $player;
+                $pk->data = 90000;
+                $pk->evid = LevelEventPacket::EVENT_START_RAIN;
+                $player->dataPacket($pk);
+            } else {
+                $pk = new LevelEventPacket();
+                $pk->position = $player;
+                $pk->data = 90000;
+                $pk->evid = LevelEventPacket::EVENT_STOP_RAIN;
+                $player->dataPacket($pk);
+            }
         }
     }
 
@@ -43,18 +45,20 @@ class EventListener implements Listener
         $entity = $event->getEntity();
         if ($entity instanceof Player) {
             $level = $entity->getLevel()->getFolderName();
-            if ($level == "earch") {
-                $pk = new LevelEventPacket();
-                $pk->position = $entity;
-                $pk->data = 90000;
-                $pk->evid = LevelEventPacket::EVENT_STOP_RAIN;
-                $entity->dataPacket($pk);
-            } else {
-                $pk = new LevelEventPacket();
-                $pk->position = $entity;
-                $pk->data = 90000;
-                $pk->evid = LevelEventPacket::EVENT_START_RAIN;
-                $entity->dataPacket($pk);
+            if ($this->weather == 2) {
+                if ($level == "earch") {
+                    $pk = new LevelEventPacket();
+                    $pk->position = $entity;
+                    $pk->data = 90000;
+                    $pk->evid = LevelEventPacket::EVENT_STOP_RAIN;
+                    $entity->dataPacket($pk);
+                } else {
+                    $pk = new LevelEventPacket();
+                    $pk->position = $entity;
+                    $pk->data = 90000;
+                    $pk->evid = LevelEventPacket::EVENT_START_RAIN;
+                    $entity->dataPacket($pk);
+                }
             }
         }
     }

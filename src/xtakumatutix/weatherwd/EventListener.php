@@ -24,8 +24,8 @@ class EventListener implements Listener
         $player = $event->getPlayer();
         $level = $player->getLevel()->getFolderName();
         if ($this->weather == 2) {
-            $player->sendMessage(' §7 >> §f今日の地球の天気は 雨 です');
-            if ($level == "earch") {
+            $player->sendMessage(' §7>> §f今日の地球の天気は §b雨§f です');
+            if ($level == "earth") {
                 $pk = new LevelEventPacket();
                 $pk->position = $player;
                 $pk->data = 90000;
@@ -39,7 +39,7 @@ class EventListener implements Listener
                 $player->dataPacket($pk);
             }
         }else{
-            $player->sendMessage(' §7 >> §f今日の地球の天気は 晴れ です');
+            $player->sendMessage(' §7>> §f今日の地球の天気は §e晴れ§f です');
         }
     }
 
@@ -47,19 +47,19 @@ class EventListener implements Listener
     {
         $entity = $event->getEntity();
         if ($entity instanceof Player) {
-            $level = $entity->getLevel()->getFolderName();
+            $level = $event->getTarget()->getFolderName();
             if ($this->weather == 2) {
-                if ($level == "earch") {
+                if ($level == "earth") {
                     $pk = new LevelEventPacket();
                     $pk->position = $entity;
                     $pk->data = 90000;
-                    $pk->evid = LevelEventPacket::EVENT_STOP_RAIN;
+                    $pk->evid = LevelEventPacket::EVENT_START_RAIN;
                     $entity->dataPacket($pk);
                 } else {
                     $pk = new LevelEventPacket();
                     $pk->position = $entity;
                     $pk->data = 90000;
-                    $pk->evid = LevelEventPacket::EVENT_START_RAIN;
+                    $pk->evid = LevelEventPacket::EVENT_STOP_RAIN;
                     $entity->dataPacket($pk);
                 }
             }
